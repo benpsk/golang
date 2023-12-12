@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/benpsk/golang/bootdotdev/rssagg/internal/database"
 	"github.com/go-chi/chi"
@@ -50,6 +51,7 @@ func main() {
 
 	v1Router.Post("/feeds", apiCfg.middlewareAuth(apiCfg.handleFeedCreate))
 	v1Router.Get("/feeds", apiCfg.handleGetFeeds)
+	v1Router.Get("/posts", apiCfg.middlewareAuth(apiCfg.handleGetPostsForUser))
 
 	v1Router.Get("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerFeedFollowsGet))
 	v1Router.Post("/feed_follows", apiCfg.middlewareAuth(apiCfg.handlerFeedFollowCreate))
@@ -62,6 +64,10 @@ func main() {
 		Handler: router,
 		Addr:    ":" + port,
 	}
+	const colectionConcurrency = 10
+	const collectionInterval = time.Minute
+	go startScraping(dbQueries, colectionConcurrency, collectionInterval)
+
 	log.Printf("Server starting on port %v", port)
 	log.Fatal(srv.ListenAndServe())
 }
