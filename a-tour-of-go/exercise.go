@@ -35,9 +35,24 @@ func WordCount(s string) map[string]int {
 	return counts
 }
 
+func fibonacci() func() int {
+	a, b := 0, 1
+	return func() int {
+		result := a
+		a, b = b, a+b
+		return result
+	}
+}
+
 func main() {
 	fmt.Println("---------Slice Exercise---------")
 	pic.Show(Pic)
 	fmt.Println("----------Map Exercise---------")
 	wc.Test(WordCount)
+
+	fmt.Println("----------Fibonacci Closure Exercise---------")
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
 }
