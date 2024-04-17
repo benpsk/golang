@@ -13,7 +13,7 @@ func Min(a ...int) int {
 	return 1
 }
 
-func main() {
+func init() {
 	fmt.Println(Min(3, 5, 1, 7, 9))
 
 	fmt.Println(Min())
