@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"text/template"
@@ -14,7 +13,7 @@ var templ = template.Must(template.New("qr").Parse(templateStr))
 
 func main() {
 	flag.Parse()
-	fmt.Println("ListenAndServe in localhost:1718")
+	log.Println("ListenAndServe at localhost:1718")
 	http.Handle("/", http.HandlerFunc(QR))
 	err := http.ListenAndServe(*addr, nil)
 	if err != nil {
