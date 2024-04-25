@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -15,5 +16,5 @@ func main() {
 			"data": "basic auth success",
 		})
 	})
-	r.Run() // default port :8080
+	log.Fatal(r.Run()) // default port :8080
 }
