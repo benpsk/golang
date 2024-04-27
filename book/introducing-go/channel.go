@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -27,7 +27,7 @@ func main() {
 			}
 			defer res.Body.Close()
 
-			bs, err := ioutil.ReadAll(res.Body)
+			bs, err := io.ReadAll(res.Body)
 			if err != nil {
 				panic(err)
 			}
