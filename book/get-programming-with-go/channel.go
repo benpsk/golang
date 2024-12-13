@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func channel() {
 	c := make(chan int)
 	for i := 0; i < 5; i++ {
 		go sleppyGopher(i, c)
